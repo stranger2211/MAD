@@ -1,0 +1,78 @@
+🔬 Experiment 8: Deploy Production-Ready Flutter App on Android Platform
+📚 Theory:
+Deploying a Flutter app on the Android platform involves preparing the app for production, creating a release build (APK), customizing launcher icons, and signing the app. This ensures your app is ready for publishing to the Play Store or distribution to users. In this experiment, you learned how to use tools like flutter_launcher_icons, rename, and official deployment steps from Flutter documentation to finalize your app for Android.
+
+🪜 Steps to Perform the Experiment
+Prerequisites
+
+Install Android Studio and Flutter SDK.
+
+Create a new Flutter project.
+
+Create Launcher Icon
+
+Visit Android Asset Studio and create your app icon.
+
+Download and add the icon files to your project’s assets folder.
+
+Configure flutter_launcher_icons
+
+Add to pubspec.yaml under dev_dependencies:
+
+yaml
+Copy
+Edit
+dev_dependencies:
+  flutter_launcher_icons: ^0.13.1
+flutter_icons:
+  android: true
+  image_path: "assets/icon/ic_launcher.png"
+Run:
+
+bash
+Copy
+Edit
+flutter pub get
+flutter pub run flutter_launcher_icons:main
+Rename Your App (Optional)
+
+Use the rename package:
+
+bash
+Copy
+Edit
+flutter pub add rename
+Customize your app name and package using:
+
+bash
+Copy
+Edit
+flutter pub run rename --appname "Your App Name"
+flutter pub run rename --bundleId com.yourdomain.app
+Signing the App
+
+Visit Flutter Android Deployment Guide.
+
+Create a key.properties file in the android/ directory with your keystore credentials.
+
+Build the Release APK
+
+Run:
+
+bash
+Copy
+Edit
+flutter build apk --build-name=1.0.1 --build-number=1
+Locate the release APK in:
+
+swift
+Copy
+Edit
+build/app/outputs/flutter-apk/app-release.apk
+Test on Android Device
+
+Transfer the APK to an Android phone and install it to verify the deployment.
+
+✅ Conclusion
+In this experiment, we deployed a Flutter app on the Android platform.
+In this experiment, we learned how to configure launcher icons, rename packages, and build a signed APK for production release.

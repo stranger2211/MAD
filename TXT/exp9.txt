@@ -1,0 +1,134 @@
+🔬 Experiment 9: Construct Metadata for PWA to Enable “Add to Home Screen” Feature
+📚 Theory:
+Progressive Web Apps (PWAs) enhance web apps with app-like features such as installability and offline access. The manifest.json file is a key part of a PWA that defines app metadata like name, icon, theme color, and start URL. The service worker enables offline capabilities by caching assets. This experiment demonstrates how to build a PWA with the "Add to Home Screen" feature using manifest and service worker files.
+
+🪜 Steps to Perform the Experiment
+Prerequisites
+
+Ensure you have basic knowledge of HTML, JavaScript, and JSON.
+
+Use a code editor like VS Code and a browser for testing.
+
+Create HTML Structure (index.html)
+
+html
+Copy
+Edit
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>E-Commerce PWA</title>
+  <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <div data-role="page" id="home">
+    <div data-role="header">
+      <h1>ShopEasy</h1>
+      <a href="#cart" class="ui-btn ui-btn-right ui-icon-shopping-cart ui-btn-icon-notext"></a>
+    </div>
+    <div data-role="content">
+      <ul data-role="listview" data-inset="true">
+        <li><a href="#product1">Smartphone</a></li>
+      </ul>
+    </div>
+    <div data-role="footer">
+      <h4>&copy; 2025 ShopEasy</h4>
+    </div>
+  </div>
+
+  <div data-role="page" id="product1">
+    <div data-role="header">
+      <a href="#home" class="ui-btn ui-icon-back ui-btn-icon-left">Back</a>
+      <h1>Smartphone</h1>
+    </div>
+    <div data-role="content">
+      <img src="images/smartphone.jpeg" alt="Smartphone" style="width:100%">
+      <h3>Price: $699</h3>
+      <button class="add-to-cart ui-btn ui-btn-b">Add to Cart</button>
+    </div>
+  </div>
+
+  <div data-role="page" id="cart">
+    <div data-role="header">
+      <h1>Shopping Cart</h1>
+    </div>
+    <div data-role="content">
+      <ul id="cart-items" data-role="listview"></ul>
+      <a href="#" class="ui-btn ui-btn-b">Checkout</a>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
+Create Manifest File (manifest.json)
+
+json
+Copy
+Edit
+{
+  "name": "ShopEasy",
+  "short_name": "ShopEasy",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2196F3",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
+Add Service Worker (sw.js)
+
+js
+Copy
+Edit
+self.addEventListener('install', event => {
+  event.waitUntil(
+    caches.open('shop-cache').then(cache => {
+      return cache.addAll([
+        '/',
+        '/index.html',
+        '/manifest.json',
+        '/images/smartphone.jpg',
+        '/js/script.js'
+      ]);
+    })
+  );
+});
+
+self.addEventListener('fetch', event => {
+  event.respondWith(
+    caches.match(event.request).then(response => {
+      return response || fetch(event.request);
+    })
+  );
+});
+Add jQuery Script File (script.js)
+
+js
+Copy
+Edit
+$(document).ready(function () {
+  $(".add-to-cart").click(function () {
+    $("#cart-items").append("<li>Smartphone - $699</li>").listview("refresh");
+    alert("Item added to cart!");
+  });
+});
+Test the PWA
+
+Open your app in a browser and ensure the prompt to install ("Add to Home Screen") appears.
+
+You should also be able to use it offline due to service worker caching.
+
+✅ Conclusion
+In this experiment, we created a manifest file to enable the “Add to Home Screen” feature in a PWA.
+In this experiment, we also used a service worker to enable offline access and caching, making the app more installable and user-friendly.

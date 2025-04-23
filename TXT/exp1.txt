@@ -1,0 +1,110 @@
+🔬 Experiment 1: Installation and Configuration of Flutter Environment
+📚 Theory:
+Flutter is an open-source UI software development kit (SDK) created by Google. It allows developers to build natively compiled applications for mobile, web, and desktop from a single codebase using the Dart programming language.
+
+To begin developing in Flutter, the environment must be set up properly. This includes:
+
+Installing Git: Required for cloning the Flutter repository.
+
+Installing the Flutter SDK: Provides tools and libraries necessary for Flutter development.
+
+Setting up Environment Variables: Ensures the flutter command is recognized in the terminal.
+
+Installing Android Studio and SDKs: Android Studio is used for writing, testing, and debugging Flutter apps.
+
+Setting up an Emulator: Provides a virtual testing device for app previews.
+
+Installing Flutter and Dart Plugins: These enhance Android Studio with tools for Flutter development.
+
+By following these setup steps, a development environment is created where Flutter apps can be built and run effectively.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Part 1: Install and Configure Flutter Environment
+1. Install Git
+Download Git from the official website.
+
+Run the .exe file and complete the installation with recommended settings.
+
+2. Install the Flutter SDK
+Download the Flutter SDK from flutter.dev.
+
+Extract the .zip file to a directory (e.g., D:/Flutter).
+
+Add the Flutter bin directory to the system PATH:
+
+Right-click My Computer > Properties > Advanced > Environment Variables.
+
+Edit the Path variable and add the path to Flutter’s bin folder.
+
+3. Verify Setup
+Open terminal and run:
+
+bash
+Copy
+Edit
+flutter doctor
+This checks your setup and displays missing components.
+
+4. Install Android Studio
+Download and install Android Studio from developer.android.com.
+
+Follow the wizard and do not import settings during setup.
+
+It will download necessary Android SDK components.
+
+5. Set Up Android Emulator
+Open Android Studio → Tools → AVD Manager → Create Virtual Device.
+
+Select device definition → Choose system image → Verify → Finish.
+
+Start the emulator using the play icon.
+
+6. Install Flutter and Dart Plugins
+Open Android Studio → File → Settings → Plugins.
+
+Search and install Flutter plugin (it will prompt to install Dart plugin too).
+
+Restart Android Studio.
+
+Part 2: Create Your First Flutter Application
+1. Create a New Project
+Open Android Studio → File → New → New Flutter Project.
+
+Select Flutter Application → Next.
+
+2. Configure Project
+Enter Project Name, Flutter SDK path, Project Location, and Description.
+
+Set the company domain and click Finish.
+
+3. Replace Default Code
+Open main.dart and paste this code:
+
+dart
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(title: Text("Hello World Flutter")),
+        body: Center(
+          child: Text("Hello, World!", style: TextStyle(fontSize: 24)),
+        ),
+      ),
+    );
+  }
+}
+4. Run the Application
+Go to Run > Run main.dart.
+
+Output: You’ll see a simple “Hello, World!” Flutter app.
+
+Conclusion:- In this experiment, we installed and configured the Flutter development environment. We ensured all necessary tools and plugins were set up to build and run Flutter applications smoothly.

@@ -1,0 +1,289 @@
+🔬 Experiment 5: Apply Navigation and Routing in a Flutter App
+📚 Theory:
+Navigation and routing are fundamental in mobile apps to allow users to move between different screens (or pages). Flutter provides a robust Navigator class for handling in-app navigation. It uses a stack-based approach, where each new screen is pushed onto the stack using Navigator.push, and removed with Navigator.pop.
+
+Named routes simplify navigation by assigning string names to each route, defined in the MaterialApp widget using the routes property. This experiment demonstrates how to navigate from a main screen (Country List) to individual detail pages for each country using named routing.
+
+🪜 Steps to Perform the Experiment
+1. Prerequisites
+Ensure Android Studio and Flutter SDK are installed and set up.
+
+Create a new Flutter project.
+
+2. Add Country Images
+Add images (Germany, India, France, Belgium, Canada) into the assets/images/ folder.
+
+Declare them in pubspec.yaml:
+
+yaml
+
+flutter:
+  assets:
+    - assets/images/Germany.png
+    - assets/images/India.png
+    - assets/images/France.png
+    - assets/images/Belgium.jpeg
+    - assets/images/Canada.png
+
+3. Replace Code in main.dart
+
+Sure! Here's the entire Dart code for Experiment 5 in a continuous manner (no breaks):
+
+dart
+
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Country List',
+      theme: ThemeData(primarySwatch: Colors.blue),
+      home: MyHomePage(title: 'Country List'),
+      routes: {
+        '/germany': (context) => GermanyPage(),
+        '/india': (context) => IndiaPage(),
+        '/france': (context) => FrancePage(),
+        '/belgium': (context) => BelgiumPage(),
+        '/canada': (context) => CanadaPage(),
+      },
+    );
+  }
+}
+
+class MyHomePage extends StatelessWidget {
+  MyHomePage({Key? key, required this.title}) : super(key: key);
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.teal,
+      appBar: AppBar(
+        title: Text("Country List"),
+        backgroundColor: Colors.black,
+        foregroundColor: Colors.white,
+      ),
+      body: ListView(
+        padding: const EdgeInsets.all(12.0),
+        children: <Widget>[
+          CountryCard(
+            name: "Germany",
+            description: "Germany is famous for its rich history, innovative engineering, beer culture, Oktoberfest, classical music, and landmarks like the Brandenburg Gate.",
+            currency: "Euro (EUR)",
+            image: "assets/images/Germany.png",
+            routeName: '/germany',
+          ),
+          CountryCard(
+            name: "India",
+            description: "India is famous for its diverse culture, rich history, iconic landmarks like the Taj Mahal, vibrant festivals, Bollywood, spices, and its delicious cuisine.",
+            currency: "Indian Rupee (INR)",
+            image: "assets/images/India.png",
+            routeName: '/india',
+          ),
+          CountryCard(
+            name: "France",
+            description: "France is famous for its rich history, iconic landmarks like the Eiffel Tower, world-class cuisine, fine wine, fashion, art, and its romantic culture.",
+            currency: "Euro (EUR)",
+            image: "assets/images/France.png",
+            routeName: '/france',
+          ),
+          CountryCard(
+            name: "Belgium",
+            description: "Belgium is famous for its delicious chocolates, beer, waffles, medieval architecture, and being the headquarters of the European Union and NATO.",
+            currency: "Euro (EUR)",
+            image: "assets/images/Belgium.jpeg",
+            routeName: '/belgium',
+          ),
+          CountryCard(
+            name: "Canada",
+            description: "Canada is famous for its stunning natural landscapes, multiculturalism, maple syrup, ice hockey, and iconic landmarks like Niagara Falls and the CN Tower.",
+            currency: "Canadian Dollar (CAD)",
+            image: "assets/images/Canada.png",
+            routeName: '/canada',
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class CountryCard extends StatelessWidget {
+  final String name;
+  final String description;
+  final String currency;
+  final String image;
+  final String routeName;
+
+  CountryCard({
+    required this.name,
+    required this.description,
+    required this.currency,
+    required this.image,
+    required this.routeName,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, routeName);
+      },
+      child: Container(
+        padding: EdgeInsets.all(5),
+        height: 180,
+        child: Card(
+          color: Colors.blueGrey,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Image.asset(image, height: 80, width: 80, fit: BoxFit.contain),
+              Expanded(
+                child: Container(
+                  padding: EdgeInsets.all(5),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      Text(name, style: TextStyle(fontWeight: FontWeight.bold)),
+                      Text(description),
+                      Text("Currency: " + currency),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class GermanyPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Germany")),
+      body: CountryDetailContent(
+        name: "Germany",
+        description: "Germany is famous for its rich history, innovative engineering, beer culture, Oktoberfest, and landmarks like the Brandenburg Gate.",
+        currency: "Euro (EUR)",
+        image: "assets/images/Germany.png",
+      ),
+    );
+  }
+}
+
+class IndiaPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("India")),
+      body: CountryDetailContent(
+        name: "India",
+        description: "India is famous for its diverse culture, rich history, iconic landmarks like the Taj Mahal, vibrant festivals, Bollywood, spices, and its delicious cuisine.",
+        currency: "Indian Rupee (INR)",
+        image: "assets/images/India.png",
+      ),
+    );
+  }
+}
+
+class FrancePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("France")),
+      body: CountryDetailContent(
+        name: "France",
+        description: "France is famous for its rich history, iconic landmarks like the Eiffel Tower, world-class cuisine, fine wine, fashion, art, and its romantic culture.",
+        currency: "Euro (EUR)",
+        image: "assets/images/France.png",
+      ),
+    );
+  }
+}
+
+class BelgiumPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Belgium")),
+      body: CountryDetailContent(
+        name: "Belgium",
+        description: "Belgium is famous for its delicious chocolates, beer, waffles, medieval architecture, and being the headquarters of the European Union and NATO.",
+        currency: "Euro (EUR)",
+        image: "assets/images/Belgium.jpeg",
+      ),
+    );
+  }
+}
+
+class CanadaPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Canada")),
+      body: CountryDetailContent(
+        name: "Canada",
+        description: "Canada is famous for its stunning natural landscapes, multiculturalism, maple syrup, ice hockey, and iconic landmarks like Niagara Falls and the CN Tower.",
+        currency: "Canadian Dollar (CAD)",
+        image: "assets/images/Canada.png",
+      ),
+    );
+  }
+}
+
+class CountryDetailContent extends StatelessWidget {
+  final String name;
+  final String description;
+  final String currency;
+  final String image;
+
+  CountryDetailContent({
+    required this.name,
+    required this.description,
+    required this.currency,
+    required this.image,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Image.asset(image, height: 200, width: double.infinity, fit: BoxFit.cover),
+            SizedBox(height: 16),
+            Text(name, style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+            SizedBox(height: 8),
+            Text(description, style: TextStyle(fontSize: 16)),
+            SizedBox(height: 8),
+            Text("Currency: " + currency, style: TextStyle(fontSize: 16)),
+            SizedBox(height: 16),
+            Center(
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text("Home Page"),
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                  textStyle: TextStyle(fontSize: 18),
+                  backgroundColor: Colors.blue,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+✅ Conclusion
+In this experiment, we learned how to implement navigation and routing between screens in a Flutter app using named routes and the Navigator class. We successfully created a multi-screen app where each card in a list navigates to a detailed page using route names.

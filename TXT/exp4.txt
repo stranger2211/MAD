@@ -1,0 +1,135 @@
+🔬 Experiment 4: Design an Interactive Form Using Form Widgets
+📚 Theory:
+Forms are an essential part of any application used to collect user input. In Flutter, the Form widget combined with TextFormField and GlobalKey<FormState> allows for easy creation of forms and input validation.
+
+Flutter provides the TextFormField widget to capture different types of text inputs (like Name, Mobile Number, Password, etc.). Each input field can be validated using the validator property to ensure the user enters data in the correct format. By leveraging layout and styling widgets like Padding, OutlineInputBorder, and ElevatedButton, a user-friendly and responsive UI can be designed for data collection.
+
+This experiment demonstrates how to build a form with validation checks such as:
+
+Empty field validation
+
+Length validation (e.g., 10 digits for mobile number, 6 for pincode, 8 for Moodle ID)
+
+🪜 Steps to Perform the Experiment
+1. Prerequisites
+Ensure Flutter SDK and Android Studio are properly set up.
+
+Create a new Flutter project.
+
+2. Replace the Code in main.dart
+Use the following code to create a basic form with validation:
+
+dart
+
+import 'package:flutter/material.dart';
+
+void main() => runApp(const MyApp());
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    const appTitle = 'APSIT';
+    return MaterialApp(
+      title: appTitle,
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text(
+            appTitle,
+            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+          ),
+          backgroundColor: Colors.blueAccent,
+        ),
+        body: const MyCustomForm(),
+      ),
+    );
+  }
+}
+
+class MyCustomForm extends StatefulWidget {
+  const MyCustomForm({super.key});
+
+  @override
+  MyCustomFormState createState() => MyCustomFormState();
+}
+
+class MyCustomFormState extends State<MyCustomForm> {
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: _formKey,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildTextField("Name", "Enter your name", (value) {
+            if (value == null || value.isEmpty) return 'Enter your Name';
+            return null;
+          }),
+          _buildTextField("Mobile Number", "Enter your Mobile Number", (value) {
+            if (value == null || value.isEmpty) return 'Enter your Mobile Number';
+            if (value.length != 10) return "Please Enter Correct Digits";
+            return null;
+          }),
+          _buildTextField("Password", "Enter your password", (value) {
+            if (value == null || value.isEmpty) return 'Enter your Password';
+            return null;
+          }, obscure: true),
+          _buildTextField("Pincode", "Enter your Pincode", (value) {
+            if (value == null || value.isEmpty) return 'Enter your Pincode';
+            if (value.length != 6) return 'Enter a 6 digit pincode';
+            return null;
+          }),
+          _buildTextField("Moodle ID", "Enter your Moodle ID", (value) {
+            if (value == null || value.isEmpty) return 'Enter your Moodle ID';
+            if (value.length != 8) return 'Enter an 8 digit Moodle ID';
+            return null;
+          }),
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16.0),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.lime),
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Login Successful')),
+                    );
+                  }
+                },
+                child: const Text(
+                  'Submit',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTextField(String label, String hint, String? Function(String?) validator, {bool obscure = false}) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: TextFormField(
+        obscureText: obscure,
+        decoration: InputDecoration(
+          labelText: label,
+          hintText: hint,
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
+        ),
+        validator: validator,
+      ),
+    );
+  }
+}
+3. Run the Application
+Select a device/emulator and click Run > Run main.dart.
+
+You’ll see a form with fields like Name, Mobile Number, Password, Pincode, and Moodle ID.
+
+✅ Conclusion
+In this experiment, we successfully designed an interactive form in Flutter using various form widgets and implemented form validation to ensure correct user inputs.

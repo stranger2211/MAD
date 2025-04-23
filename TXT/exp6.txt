@@ -1,0 +1,91 @@
+🔬 Experiment 6: Apply Concepts of Gestures in Flutter App
+📚 Theory:
+Gestures are vital in mobile apps for creating interactive UIs. In Flutter, the GestureDetector widget allows us to detect gestures such as taps, drags, and swipes. It plays a crucial role in enhancing user experience by enabling dynamic interactions with app components. In this experiment, we implement gesture detection using GestureDetector to toggle the state of a light bulb icon on a tap.
+
+🪜 Steps to Perform the Experiment
+Prerequisites
+Ensure Android Studio and Flutter SDK are installed and set up properly.
+
+Create New Project
+Start a new Flutter project in Android Studio.
+
+Set Up main.dart
+Add the following Dart code to main.dart to create a toggleable light using gestures:
+
+dart
+Copy
+Edit
+import 'package:flutter/material.dart';
+
+void main() => runApp(const MyApp());
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  static const String _title = 'Flutter Code Sample';
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      title: _title,
+      home: MyStatefulWidget(),
+    );
+  }
+}
+
+class MyStatefulWidget extends StatefulWidget {
+  const MyStatefulWidget({super.key});
+
+  @override
+  State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
+}
+
+class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+  bool _lightIsOn = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('CHANGE STATE OF LIGHTS'),
+      ),
+      body: Container(
+        alignment: FractionalOffset.center,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(
+                Icons.lightbulb_outline,
+                color: _lightIsOn ? Colors.yellow.shade600 : Colors.black,
+                size: 60,
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  _lightIsOn = !_lightIsOn; // Toggle light state
+                });
+              },
+              child: Container(
+                color: Colors.yellow.shade600,
+                padding: const EdgeInsets.all(8),
+                child: Text(
+                  _lightIsOn ? 'TURN LIGHT OFF' : 'TURN LIGHT ON',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+Run the App
+Observe that tapping on the yellow button toggles the state of the bulb icon between "on" (yellow) and "off" (black).
+
+✅ Conclusion
+In this experiment, we successfully designed a Flutter application using the GestureDetector widget.
+In this experiment, we learned how to respond to user interaction through touch gestures in a Flutter UI.

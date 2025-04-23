@@ -1,0 +1,118 @@
+🔬 Experiment 2: Flutter UI Using Basic Widgets (Student ID Layout)
+📚 Theory:
+In Flutter, a widget is a basic building block of the app’s UI. Everything in Flutter is a widget — from structural elements like buttons and columns to stylistic elements like fonts and padding.
+
+This experiment focuses on using basic Flutter widgets to create a simple user interface. The goal is to design a Student ID layout that includes:
+
+AppBar: A top navigation bar.
+
+Image Widget: To display the student's photo or a symbolic image (e.g., panda).
+
+Text Widget: To show information like student name or description.
+
+The layout is created using a Column widget to arrange children vertically and wrapped in a SingleChildScrollView to make the UI scrollable if needed. Styling elements like SizedBox and TextStyle are used to adjust spacing and font appearance.
+
+This experiment helps understand the core structure of a Flutter UI and how to use basic widgets to build a visually structured and interactive layout.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+🔧 Experiment No. 2: Create Flutter UI with Basic Widgets
+🎯 Aim:
+To install and configure Flutter environment and develop a Flutter UI to create a student-ID using basic Flutter widgets.
+
+🧰 Prerequisites:
+
+Android Studio
+
+Flutter SDK
+
+🪜 Steps to Perform the Experiment
+1. Setup the Environment (If Not Done in Exp. 1)
+Ensure Git, Flutter SDK, and Android Studio are already installed and configured.
+
+Set up Flutter and Dart plugins in Android Studio.
+
+Verify everything is working using:
+
+flutter doctor
+2. Create a New Flutter Project
+Open Android Studio.
+
+Navigate to File > New > New Flutter Project.
+
+Choose Flutter Application and click Next.
+
+Fill in project details (name, location, domain) and click Finish.
+
+3. Prepare Image Asset
+Add your image (e.g., panda.jpeg) to the assets/images/ directory in your project folder.
+
+Update pubspec.yaml to include the asset:
+
+yaml
+
+flutter:
+  assets:
+    - assets/images/panda.jpeg
+4. Replace Code in main.dart
+Open the lib/main.dart file.
+
+Replace the default code with the following:
+
+dart
+
+import 'package:flutter/material.dart';
+
+void main() => runApp(TextWidget());
+
+class TextWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('My First App'),
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              // Image at the top
+              Image.asset(
+                'assets/images/panda.jpeg',
+                height: 200,
+                fit: BoxFit.cover,
+              ),
+              SizedBox(height: 20),
+              // Text below the image
+              Text(
+                'This image shows a panda eating bamboo',
+                style: TextStyle(fontSize: 20),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+5. Run the Application
+Select your emulator or connected device.
+
+Click Run > Run main.dart or use the play ▶️ button in Android Studio.
+
+6. View Output
+You should see:
+
+A top AppBar with the title My First App.
+
+An image of a panda.
+
+A description below the image: "This image shows a panda eating bamboo."
+
+✅ Conclusion:
+In this experiment, a basic user interface was created using Flutter widgets like AppBar, Image, Text, and Column.
+
+Let me know if you'd like this formatted as a PDF or a checklist for submission!

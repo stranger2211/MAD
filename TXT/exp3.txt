@@ -1,0 +1,153 @@
+🔬 Experiment 3: Layout Design Using Flutter Layout Widgets
+📚 Theory:
+Flutter provides a wide variety of layout widgets that allow developers to design highly customizable and responsive user interfaces. Layout widgets like ListView, Row, Column, Container, Expanded, and Card help in structuring the UI content in flexible and reusable formats.
+
+In this experiment, we use the ListView widget to display a list of products (like iPhone, Android, Tablet, etc.), each styled with a Card containing an image, name, description, and price. The layout is designed using the Row and Column widgets inside a custom widget (ProductBox), showing how Flutter’s layout system can be used to design clean and structured UI screens.
+
+🪜 Steps to Perform the Experiment
+1. Prerequisites
+Ensure Flutter SDK and Android Studio are installed and configured.
+
+Create a Flutter project in Android Studio.
+
+2. Add Image Assets
+Place required images (iphone.jpeg, android.png, tablet.jpeg, laptop.jpeg, computer.jpeg) inside the assets/images/ directory.
+
+Declare them in pubspec.yaml:
+
+yaml
+
+flutter:
+  assets:
+    - assets/images/iphone.jpeg
+    - assets/images/android.png
+    - assets/images/tablet.jpeg
+    - assets/images/laptop.jpeg
+    - assets/images/computer.jpeg
+3. Replace Code in main.dart
+Use the following code structure:
+
+dart
+
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(primarySwatch: Colors.blue),
+      home: MyHomePage(title: 'Flutter Demo Home Page'),
+    );
+  }
+}
+
+class MyHomePage extends StatelessWidget {
+  final String title;
+  MyHomePage({Key? key, required this.title}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.teal,
+      appBar: AppBar(
+        title: Text("Product List"),
+        backgroundColor: Colors.black,
+        foregroundColor: Colors.white,
+      ),
+      body: ListView(
+        padding: const EdgeInsets.fromLTRB(3.0, 12.0, 3.0, 12.0),
+        children: <Widget>[
+          ProductBox(
+              color: Colors.amberAccent,
+              name: "iPhone",
+              description: "iPhone is the top branded phone ever",
+              price: 55000,
+              images: "assets/images/iphone.jpeg"),
+          ProductBox(
+              color: Colors.indigo,
+              name: "Android",
+              description: "Android is a very stylish phone",
+              price: 10000,
+              images: "assets/images/android.png"),
+          ProductBox(
+              color: Colors.pinkAccent,
+              name: "Tablet",
+              description: "Tablet is a popular device for official meetings",
+              price: 25000,
+              images: "assets/images/tablet.jpeg"),
+          ProductBox(
+              color: Colors.greenAccent,
+              name: "Laptop",
+              description: "Laptop is most famous electronic device",
+              price: 35000,
+              images: "assets/images/laptop.jpeg"),
+          ProductBox(
+              color: Colors.blueGrey,
+              name: "Desktop",
+              description: "Desktop is most popular for regular use",
+              price: 10000,
+              images: "assets/images/computer.jpeg"),
+        ],
+      ),
+    );
+  }
+}
+
+class ProductBox extends StatelessWidget {
+  final String name;
+  final String description;
+  final int price;
+  final Color color;
+  final String images;
+
+  ProductBox(
+      {Key? key,
+      required this.name,
+      required this.description,
+      required this.price,
+      required this.color,
+      required this.images})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(2),
+      height: 110,
+      child: Card(
+        color: color,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            Image.asset(images, height: 80, width: 80, fit: BoxFit.contain),
+            Expanded(
+              child: Container(
+                padding: EdgeInsets.all(5),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Text(this.name,
+                        style: TextStyle(fontWeight: FontWeight.bold)),
+                    Text(this.description),
+                    Text("Price: " + this.price.toString()),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+4. Run the Application
+Use Run > Run main.dart in Android Studio.
+
+Output will display a scrollable product list UI with images, names, descriptions, and prices.
+
+✅ Conclusion
+In this experiment, we have designed a layout using various Flutter layout widgets such as ListView, Row, Column, and Card to display a dynamic product list.
+
