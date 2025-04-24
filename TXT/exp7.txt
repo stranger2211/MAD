@@ -40,18 +40,18 @@ Step 3: Configure Android Files
 Edit android/build.gradle:
 
 gradle
-Copy
-Edit
+
 buildscript {
   dependencies {
     classpath 'com.google.gms:google-services:4.3.15'
   }
 }
+
+
 Edit android/app/build.gradle:
 
 gradle
-Copy
-Edit
+
 apply plugin: 'com.google.gms.google-services'
 
 android {
@@ -63,8 +63,7 @@ android {
 Step 1: Add Dependencies in pubspec.yaml
 
 yaml
-Copy
-Edit
+
 dependencies:
   flutter:
     sdk: flutter
@@ -73,14 +72,12 @@ dependencies:
 Run:
 
 bash
-Copy
-Edit
+
 flutter pub get
 Step 2: Update main.dart
 
 dart
-Copy
-Edit
+
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -159,14 +156,12 @@ class _CounterScreenState extends State<CounterScreen> {
 Step 1: Build Web App
 
 bash
-Copy
-Edit
+
 flutter build web
 Step 2: Firebase Hosting Commands
 
 bash
-Copy
-Edit
+
 firebase login
 firebase init
 Select Hosting
