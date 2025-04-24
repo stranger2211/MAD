@@ -1,0 +1,188 @@
+🔬 Experiment 7: Implement Firebase Connectivity in a Flutter App (with Firestore)
+📚 Theory:
+Firebase is a Backend-as-a-Service (BaaS) platform that provides services like real-time databases, cloud storage, authentication, and hosting. Flutter can integrate easily with Firebase to build responsive and scalable apps. In this experiment, we connect a Flutter app with Firebase to store and update a counter value in Firestore (a NoSQL database).
+
+🧰 Prerequisites:
+Install Android Studio and Flutter SDK
+
+Firebase CLI installed (npm install -g firebase-tools)
+
+Google account to access Firebase Console
+
+🪜 Steps to Perform the Experiment:
+✅ PART 1: Firebase Setup
+Step 1: Create a Firebase Project
+
+Go to https://console.firebase.google.com
+
+Click Add Project, name it (e.g., flutter_counter_app)
+
+Disable Google Analytics
+
+Click Create Project
+
+Step 2: Add Android App
+
+Click Add App → Choose Android
+
+Add:
+
+Package Name (same as in AndroidManifest.xml)
+
+App nickname (optional)
+
+Download google-services.json
+
+Place it in: android/app/
+
+Step 3: Configure Android Files
+
+Edit android/build.gradle:
+
+gradle
+Copy
+Edit
+buildscript {
+  dependencies {
+    classpath 'com.google.gms:google-services:4.3.15'
+  }
+}
+Edit android/app/build.gradle:
+
+gradle
+Copy
+Edit
+apply plugin: 'com.google.gms.google-services'
+
+android {
+    defaultConfig {
+        minSdkVersion 21
+    }
+}
+✅ PART 2: Flutter Setup
+Step 1: Add Dependencies in pubspec.yaml
+
+yaml
+Copy
+Edit
+dependencies:
+  flutter:
+    sdk: flutter
+  firebase_core: ^2.30.0
+  cloud_firestore: ^4.14.0
+Run:
+
+bash
+Copy
+Edit
+flutter pub get
+Step 2: Update main.dart
+
+dart
+Copy
+Edit
+import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Firebase Counter',
+      debugShowCheckedModeBanner: false,
+      home: CounterScreen(),
+    );
+  }
+}
+
+class CounterScreen extends StatefulWidget {
+  @override
+  _CounterScreenState createState() => _CounterScreenState();
+}
+
+class _CounterScreenState extends State<CounterScreen> {
+  int _counter = 0;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  Future<void> _getCounter() async {
+    DocumentSnapshot snapshot =
+        await _firestore.collection('counters').doc('clicks').get();
+    if (snapshot.exists) {
+      setState(() {
+        _counter = snapshot['value'];
+      });
+    }
+  }
+
+  Future<void> _incrementCounter() async {
+    setState(() {
+      _counter++;
+    });
+
+    await _firestore.collection('counters').doc('clicks').set({
+      'value': _counter,
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getCounter();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Firebase Counter")),
+      body: Center(
+        child: Text(
+          'Counter value: $_counter',
+          style: TextStyle(fontSize: 30),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+        child: Icon(Icons.add),
+      ),
+    );
+  }
+}
+✅ PART 3: Deploy with Firebase Hosting (Optional)
+Step 1: Build Web App
+
+bash
+Copy
+Edit
+flutter build web
+Step 2: Firebase Hosting Commands
+
+bash
+Copy
+Edit
+firebase login
+firebase init
+Select Hosting
+
+Choose Use existing project
+
+Set build/web as the public directory
+
+Configure as a single-page app (yes)
+
+Step 3: Deploy
+
+bash
+Copy
+Edit
+firebase deploy
+✅ Conclusion:
+In this experiment, we successfully integrated Firebase with a Flutter app using Firestore. We created a counter that reads from and writes to the Firebase database. This demonstrated the power of cloud-based real-time storage with Flutter and Firebase.
+
