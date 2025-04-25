@@ -20,64 +20,7 @@ Edit
   <title>Page Title</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-    body {
-      font-family: Arial;
-      margin: 0;
-    }
-    .header {
-      padding: 60px;
-      text-align: center;
-      background: #1abc9c;
-      color: white;
-    }
-    .navbar {
-      display: flex;
-      background-color: #333;
-    }
-    .navbar a {
-      color: white;
-      padding: 14px 20px;
-      text-decoration: none;
-      text-align: center;
-    }
-    .navbar a:hover {
-      background-color: #ddd;
-      color: black;
-    }
-    .row {
-      display: flex;
-      flex-wrap: wrap;
-    }
-    .side {
-      flex: 30%;
-      background-color: #f1f1f1;
-      padding: 20px;
-    }
-    .main {
-      flex: 70%;
-      background-color: white;
-      padding: 20px;
-    }
-    .fakeimg {
-      background-color: #aaa;
-      width: 100%;
-      padding: 20px;
-    }
-    .footer {
-      padding: 20px;
-      text-align: center;
-      background: #ddd;
-    }
-    @media (max-width: 700px) {
-      .row, .navbar {
-        flex-direction: column;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -130,6 +73,88 @@ Edit
 
 </body>
 </html>
+
+styles.css
+
+/* Global Styles */
+* {
+    box-sizing: border-box;
+  }
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+  }
+  
+  /* Announcement */
+  .announcement {
+    background: yellow;
+    padding: 5px;
+    text-align: center;
+  }
+  
+  /* Header */
+  .header {
+    padding: 60px;
+    text-align: center;
+    background: #1abc9c;
+    color: white;
+  }
+  
+  /* Navbar */
+  .navbar {
+    display: flex;
+    background-color: #333;
+  }
+  .navbar a {
+    color: white;
+    padding: 14px 20px;
+    text-decoration: none;
+    text-align: center;
+    flex-grow: 1;
+  }
+  .navbar a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  
+  /* Content Layout */
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .side {
+    flex: 30%;
+    background-color: #f1f1f1;
+    padding: 20px;
+  }
+  .main {
+    flex: 70%;
+    background-color: white;
+    padding: 20px;
+  }
+  
+  /* Image Box */
+  .fakeimg {
+    background-color: #aaa;
+    width: 100%;
+    padding: 20px;
+  }
+  
+  /* Footer */
+  .footer {
+    padding: 20px;
+    text-align: center;
+    background: #ddd;
+  }
+  
+  /* Responsive Media Query */
+  @media (max-width: 700px) {
+    .row,
+    .navbar {
+      flex-direction: column;
+    }
+  }
+  
 Output:
 A fully responsive web page layout with:
 
