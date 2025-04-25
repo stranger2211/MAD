@@ -9,6 +9,17 @@ Ensure you have basic knowledge of HTML, JavaScript, and JSON.
 
 Use a code editor like VS Code and a browser for testing.
 
+ShopEasyPWA/
+│
+├── index.html
+├── manifest.json
+├── sw.js
+├── js/
+│   └── script.js
+├── images/
+│   └── smartphone.jpeg
+└── icon.png
+
 Create HTML Structure (index.html)
 
 html
